@@ -1,5 +1,3 @@
-# rabbitmq
-#
 # @summary A module to manage RabbitMQ
 #
 # @example Basic usage
@@ -82,7 +80,9 @@
 #  }
 #
 # @param admin_enable If enabled sets up the management interface/plugin for RabbitMQ.
-# @param auth_backends An array specifying authorization/authentication backend to use. Single quotes should be placed around array entries, ex. ['{foo, baz}', 'baz'] Defaults to [rabbit_auth_backend_internal], and if using LDAP defaults to [rabbit_auth_backend_internal, rabbit_auth_backend_ldap].
+# @param auth_backends An array specifying authorization/authentication backend to use. Single quotes should be placed around array entries,
+#  ex. `['{foo, baz}', 'baz']` Defaults to [rabbit_auth_backend_internal], and if using LDAP defaults to [rabbit_auth_backend_internal,
+#  rabbit_auth_backend_ldap].
 # @param cluster_node_type Choose between disc and ram nodes.
 # @param cluster_nodes An array of nodes for clustering.
 # @param cluster_partition_handling Value to set for `cluster_partition_handling` RabbitMQ configuration variable.
@@ -138,7 +138,7 @@
 # @param package_ensure Determines the ensure state of the package.  Set to installed by default, but could be changed to latest.
 # @param package_gpg_key RPM package GPG key to import. Uses source method. Should be a URL for Debian/RedHat OS family, or a file name for
 #  RedHat OS family. Set to https://www.rabbitmq.com/rabbitmq-release-signing-key.asc for RedHat OS Family and
-#  https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey for Debian OS Family by default.. Note, that `key_content`, if specified, would
+#  https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey for Debian OS Family by default. Note, that `key_content`, if specified, would
 #  override this parameter for Debian OS family.
 # @param package_name Name(s) of the package(s) to install
 # @param port The RabbitMQ port.
@@ -147,9 +147,8 @@
 # @param service_ensure The state of the service.
 # @param service_manage Determines if the service is managed.
 # @param service_name The name of the service to manage.
-# @param $service_restart. Default defined in param.pp. Whether to resetart the service on config change.
+# @param service_restart Default defined in param.pp. Whether to restart the service on config change.
 # @param ssl Configures the service for using SSL.
-#  port => UNSET
 # @param ssl_cacert CA cert path to use for SSL.
 # @param ssl_cert Cert to use for SSL.
 # @param ssl_cert_password Password used when generating CSR.
@@ -159,7 +158,8 @@
 # @param ssl_honor_cipher_order Force use of server cipher order
 # @param ssl_interface Interface for SSL listener to bind to
 # @param ssl_key Key to use for SSL.
-# @param ssl_only Configures the service to only use SSL.  No cleartext TCP listeners will be created. Requires that ssl => true and
+# @param ssl_only Configures the service to only use SSL. No cleartext TCP listeners will be created. Requires that ssl => true and
+#  port => undef
 # @param ssl_management_port SSL management port.
 # @param ssl_port SSL port for RabbitMQ
 # @param ssl_reuse_sessions Reuse ssl sessions
@@ -168,7 +168,6 @@
 # @param ssl_verify rabbitmq.config SSL verify setting.
 # @param ssl_fail_if_no_peer_cert rabbitmq.config `fail_if_no_peer_cert` setting.
 # @param ssl_management_verify rabbitmq.config SSL verify setting for rabbitmq_management.
-# @param ssl_manaagement_fail_if_no_peer_cert rabbitmq.config `fail_if_no_peer_cert` setting for rabbitmq_management.
 # @param ssl_versions Choose which SSL versions to enable. Example: `['tlsv1.2', 'tlsv1.1']` Note that it is recommended to disable `sslv3
 #  and `tlsv1` to prevent against POODLE and BEAST attacks. Please see the [RabbitMQ SSL](https://www.rabbitmq.com/ssl.html) documentation
 #  for more information.
@@ -184,12 +183,13 @@
 # @param tcp_recbuf Corresponds to recbuf in RabbitMQ `tcp_listen_options`
 # @param tcp_sndbuf Integer, corresponds to sndbuf in RabbitMQ `tcp_listen_options`
 # @param wipe_db_on_cookie_change Boolean to determine if we should DESTROY AND DELETE the RabbitMQ database.
-# @param rabbitmq_user OS dependent, default defined in param.pp. The system user the rabbitmq daemon runs as.
-# @param rabbitmq_group OS dependent, default defined in param.pp. The system group the rabbitmq daemon runs as.
-# @param rabbitmq_home OS dependent. default defined in param.pp. The home directory of the rabbitmq deamon.
-# @param $rabbitmqadmin_package OS dependent. default defined in param.pp. If undef: install rabbitmqadmin via archive, otherwise via package
-# @param $archive_options. default defined in param.pp.  Extra options to Archive resource to download rabbitmqadmin file
-# @param $loopback_users. default defined in param.pp. This option configures a list of users to allow access via the loopback interfaces
+# @param rabbitmq_user OS dependent The system user the rabbitmq daemon runs as.
+# @param rabbitmq_group OS dependent The system group the rabbitmq daemon runs as.
+# @param rabbitmq_home OS dependent The home directory of the rabbitmq deamon.
+# @param rabbitmqadmin_package OS dependent If undef: install rabbitmqadmin via archive, otherwise via package
+# @param archive_options Extra options to Archive resource to download rabbitmqadmin file
+# @param loopback_users This option configures a list of users to allow access via the loopback interfaces
+
 class rabbitmq(
   Boolean $admin_enable                                                                            = $rabbitmq::params::admin_enable,
   Enum['ram', 'disk', 'disc'] $cluster_node_type                                                   = $rabbitmq::params::cluster_node_type,
